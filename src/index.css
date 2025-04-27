@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-800;
+  }
+}
+
+@layer components {
+  /* Custom range slider styling */
+  input[type="range"] {
+    @apply appearance-none w-full h-1 bg-gray-200 rounded-lg;
+    &::-webkit-slider-thumb {
+      @apply appearance-none w-4 h-4 rounded-full bg-purple-500 cursor-pointer;
+    }
+    &::-moz-range-thumb {
+      @apply w-4 h-4 rounded-full bg-purple-500 border-0 cursor-pointer;
+    }
+  }
+}
+
+/* Transition animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
