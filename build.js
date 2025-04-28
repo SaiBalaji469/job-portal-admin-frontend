@@ -1,3 +1,4 @@
+import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -5,6 +6,29 @@ import { fileURLToPath } from 'url';
 // Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Run the build command
+console.log('Building the React application...');
+try {
+  // First, ensure all dependencies are installed
+  console.log('Installing dependencies...');
+  execSync('npm install', { 
+    stdio: 'inherit',
+    cwd: __dirname
+  });
+
+  // Then run the Vite build
+  console.log('Running Vite build...');
+  execSync('npm run build', { 
+    stdio: 'inherit',
+    cwd: __dirname
+  });
+
+  console.log('Build completed successfully!');
+} catch (error) {
+  console.error('Build failed:', error);
+  process.exit(1);
+}
 
 // Create dist directory if it doesn't exist
 const distDir = path.join(__dirname, 'dist');
@@ -63,6 +87,4 @@ console.log('Created index.html in dist directory');
 const assetsDir = path.join(distDir, 'assets');
 if (!fs.existsSync(assetsDir)) {
   fs.mkdirSync(assetsDir, { recursive: true });
-}
-
-console.log('Build completed successfully!'); 
+} 
