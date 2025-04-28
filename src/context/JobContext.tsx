@@ -2,7 +2,9 @@ import React, { createContext, useState, useContext, ReactNode, useEffect } from
 import { JobType } from '../types';
 import axios from 'axios';
 
-const API_URL = 'https://job-portal-admin-backend-cb79.vercel.app/api/';
+const API_URL = import.meta.env.PROD
+  ? 'https://job-portal-admin-backend-cb79.vercel.app/api'
+  : 'http://localhost:5001/api';
 
 interface JobContextType {
   jobs: JobType[];
